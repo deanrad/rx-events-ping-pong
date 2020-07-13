@@ -1,19 +1,27 @@
-import { on, trigger } from "rx-helper";
+import { listen, trigger, after, reset } from "polyrhythm";
 
 const ballElem = document.getElementById("ball");
 
-on("ping", () => {
+// HMR-friendliness
+reset();
+console.clear();
+
+listen("ping", () => {
   ballElem.style.left = "95vw";
-  new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
+  ballElem.style.transform = "rotate(100deg)";
+  // Important: 'After' will not start unless we await it!
+  return after(2000, () => {
     trigger("pong");
   });
 });
 
-on("pong", () => {
+listen("pong", () => {
   ballElem.style.left = "1vw";
-  new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
+  ballElem.style.transform = "rotate(0deg)";
+  return after(2000, () => {
     trigger("ping");
   });
 });
 
+listen(true, ({ type }) => console.log(`${type}`));
 trigger("ping");
