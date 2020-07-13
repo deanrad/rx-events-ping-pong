@@ -5,19 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       .court {
+        display: flex;
+        flex-direction: column;
         position: absolute;
+        width: 100%;
       }
       .ani-ball {
+        display: block;
         position: relative;
-        left: 0px;
-        transition: transform 3.5s, left 3.5s cubic-bezier(0.19, 1, 0.22, 1);
+        transition: transform 1s ease-out,
+          left 3.5s cubic-bezier(0.19, 1, 0.22, 1);
+        transform-origin: center 27px;
+        font-size: 3rem;
+        width: 48px;
+      }
+      #turf {
+        --color: springgreen;
+        background-color: var(--color);
+        color: var(--color);
+        min-height: 95px;
+        position: relative;
+        top: -13px;
       }
     </style>
   </head>
 
   <body>
     <div class="court">
-      <span id="ball" class="ani-ball">⚽️</span>
+      <div id="ball" class="ani-ball">⚽️</div>
+      <div id="turf">X</div>
     </div>
 
     <script src="src/index.ts"></script>
