@@ -5,7 +5,7 @@ const ballElem = document.getElementById("ball");
 reset();
 console.clear();
 
-const player1 = listen("ping", () => {
+listen("ping", () => {
   ballElem.style.left = "90vw";
   ballElem.style.transform = "rotate(-320deg)";
   // Important: 'After' will not start unless we await it!
@@ -14,7 +14,7 @@ const player1 = listen("ping", () => {
   });
 });
 
-listen("pong", () => {
+const player2 = listen("pong", () => {
   ballElem.style.left = "1vw";
   ballElem.style.transform = "rotate(0deg)";
   return after(2000, () => {
@@ -25,6 +25,6 @@ listen("pong", () => {
 listen(true, ({ type }) => console.log(`${type}`));
 trigger("ping");
 
-after(12000, () => {
-  player1.unsubscribe();
-}).then(() => console.log("Player 1 is Going Home!"));
+// after(12000, () => {
+//   player2.unsubscribe();
+// }).then(() => console.log("Player 2 is Going Home!"));
